@@ -20,7 +20,18 @@ jobs:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
       - name: Deploy to VPS
-        run: env
+        run: |
+          echo "DEBUG: $DEBUG"
+          echo "SECRET_KEY is set to ${#SECRET_KEY} characters"  # Just print length for sensitive vars
+          echo "DJANGO_ALLOWED_HOSTS: $DJANGO_ALLOWED_HOSTS"
+          echo "SQL_ENGINE: $SQL_ENGINE"
+          echo "SQL_DATABASE: $SQL_DATABASE"
+          echo "SQL_USER: $SQL_USER"
+          echo "SQL_HOST: $SQL_HOST"
+          echo "SQL_PORT: $SQL_PORT"
+          echo "DATABASE: $DATABASE"
+          echo "POSTGRES_USER: $POSTGRES_USER"
+          echo "POSTGRES_DB: $POSTGRES_DB"
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DEBUG: ${{ secrets.DEBUG }}
