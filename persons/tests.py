@@ -26,12 +26,12 @@ class PersonAPITests(APITestCase):
 
     def test_create_person(self):
         url = reverse('person-list')
-        data = {'name': 'Maria Dalla', 'age': 25}
+        data = {'name': 'Maria dalla', 'age': 25}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertIn('Location', response.headers)
         self.assertEqual(Person.objects.count(), 2)
-        self.assertEqual(Person.objects.get(id=2).name, 'Maria Dalla')
+        self.assertEqual(Person.objects.get(id=2).name, 'Maria dalla')
 
     def test_update_person(self):
         url = reverse('person-detail', args=[self.person.id])
