@@ -7,16 +7,16 @@ services:
     expose:
       - 8000
     environment:
-      - DEBUG=$env:DEBUG
-      - SECRET_KEY=$env:SECRET_KEY
-      - DJANGO_ALLOWED_HOSTS=$env:DJANGO_ALLOWED_HOSTS
-      - SQL_ENGINE=$env:SQL_ENGINE
-      - SQL_DATABASE=$env:SQL_DATABASE
-      - SQL_USER=$env:SQL_USER
-      - SQL_PASSWORD=$env:SQL_PASSWORD
-      - SQL_HOST=$env:SQL_HOST
-      - SQL_PORT=$env:SQL_PORT
-      - DATABASE=$env:DATABASE
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: ${DEBUG}
+      DJANGO_ALLOWED_HOSTS: ${SECRET_KEY}
+      SQL_ENGINE: ${SQL_ENGINE}
+      SQL_DATABASE: ${SQL_DATABASE}
+      SQL_USER: ${SQL_USER}
+      SQL_PASSWORD: ${SQL_PASSWORD}
+      SQL_HOST: ${SQL_HOST}
+      SQL_PORT: ${SQL_PORT}
+      DATABASE: ${DATABASE}
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
@@ -27,9 +27,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=$env:POSTGRES_USER
-      - POSTGRES_PASSWORD=$env:POSTGRES_PASSWORD
-      - POSTGRES_DB=$env:POSTGRES_D
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
   nginx:
     build: ./nginx
     volumes:
