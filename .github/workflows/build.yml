@@ -35,10 +35,10 @@ jobs:
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
-            cd ${{ secrets.VPS_DEPLOY_PATH }}
-            git pull origin main
-            docker compose -f docker-compose.prod.yml down -v
-            docker compose -f docker-compose.prod.yml up -d --build
-          EOF
+        # run: |
+        #   ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+        #     cd ${{ secrets.VPS_DEPLOY_PATH }}
+        #     git pull origin main
+        #     docker compose -f docker-compose.prod.yml down -v
+        #     docker compose -f docker-compose.prod.yml up -d --build
+        #   EOF
