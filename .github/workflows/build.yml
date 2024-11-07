@@ -12,7 +12,7 @@ jobs:
     env:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       DEBUG: ${{ secrets.DEBUG }}
-      DJANGO_ALLOWED_HOSTS: ${{ secrets.SECRET_KEY }}
+      DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
       SQL_ENGINE: ${{ secrets.SQL_ENGINE }}
       SQL_DATABASE: ${{ secrets.SQL_DATABASE }}
       SQL_USER: ${{ secrets.SQL_USER }}
