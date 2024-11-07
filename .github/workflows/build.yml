@@ -39,7 +39,7 @@ jobs:
             docker compose -f docker-compose.prod.yml down -v
             docker-compose -f docker-compose.prod.yml up -d --build \
             -e DEBUG=${{ secrets.DEBUG }} \
-            -e SECRET_KEY="${{ secrets.SECRET_KEY }}" \
+            -e SECRET_KEY=${{ secrets.SECRET_KEY }} \
             -e DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }} \
             -e SQL_ENGINE=${{ secrets.SQL_ENGINE }} \
             -e SQL_DATABASE=${{ secrets.SQL_DATABASE }} \
