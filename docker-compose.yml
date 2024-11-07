@@ -1,18 +1,23 @@
-version: "3"
 services:
-  postgres:
-    image: library/postgres:13
-    container_name: postgres
-    restart: on-failure
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: "postgres"
-      POSTGRES_DB: postgres
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:5000
     volumes:
-      - db-data:/var/lib/postgresql/data
-      - ./postgres/:/docker-entrypoint-initdb.d/
+      - ./app/:/usr/src/app/
     ports:
-      - "5432:5432"
+      - 5000:5000
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+  db:
+    image: postgres:17
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=ali
+      - POSTGRES_PASSWORD=aliali
+      - POSTGRES_DB=personsdb
 
 volumes:
-  db-data:
+  postgres_data:
