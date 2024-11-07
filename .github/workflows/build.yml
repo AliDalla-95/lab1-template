@@ -37,18 +37,18 @@ jobs:
             cd ${{ secrets.VPS_DEPLOY_PATH }}
             git pull origin master
             docker compose -f docker-compose.prod.yml down -v
-            export DEBUG=${{ secrets.DEBUG }}
-            export SECRET_KEY=${{ secrets.SECRET_KEY }}
-            export DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }}
-            export SQL_ENGINE=${{ secrets.SQL_ENGINE }}
-            export SQL_DATABASE=${{ secrets.SQL_DATABASE }}
-            export SQL_USER=${{ secrets.SQL_USER }}
-            export SQL_PASSWORD=${{ secrets.SQL_PASSWORD }}
-            export SQL_HOST=${{ secrets.SQL_HOST }}
-            export SQL_PORT=${{ secrets.SQL_PORT }}
-            export DATABASE=${{ secrets.DATABASE }}
-            export POSTGRES_USER=${{ secrets.POSTGRES_USER }}
-            export POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
-            export POSTGRES_DB=${{ secrets.POSTGRES_DB }}
-            docker compose -f docker-compose.prod.yml up -d --build
+            docker-compose -f docker-compose.prod.yml up -d --build \
+            -e DEBUG=${{ secrets.DEBUG }} \
+            -e SECRET_KEY=${{ secrets.SECRET_KEY }} \
+            -e DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }} \
+            -e SQL_ENGINE=${{ secrets.SQL_ENGINE }} \
+            -e SQL_DATABASE=${{ secrets.SQL_DATABASE }} \
+            -e SQL_USER=${{ secrets.SQL_USER }} \
+            -e SQL_PASSWORD=${{ secrets.SQL_PASSWORD }} \
+            -e SQL_HOST=${{ secrets.SQL_HOST }} \
+            -e SQL_PORT=${{ secrets.SQL_PORT }} \
+            -e DATABASE=${{ secrets.DATABASE }} \
+            -e POSTGRES_USER=${{ secrets.POSTGRES_USER }} \
+            -e POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
+            -e POSTGRES_DB=${{ secrets.POSTGRES_DB }}
           EOF
