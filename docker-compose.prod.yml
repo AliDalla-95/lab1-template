@@ -7,16 +7,16 @@ services:
     expose:
       - 8000
     environment:
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      DEBUG: ${{ secrets.DEBUG }}
-      DJANGO_ALLOWED_HOSTS: ${{ secrets.SECRET_KEY }}
-      SQL_ENGINE: ${{ secrets.SQL_ENGINE }}
-      SQL_DATABASE: ${{ secrets.SQL_DATABASE }}
-      SQL_USER: ${{ secrets.SQL_USER }}
-      SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
-      SQL_HOST: ${{ secrets.SQL_HOST }}
-      SQL_PORT: ${{ secrets.SQL_PORT }}
-      DATABASE: ${{ secrets.DATABASE }}
+      SECRET_KEY: ${{ SECRET_KEY }}
+      DEBUG: ${{ DEBUG }}
+      DJANGO_ALLOWED_HOSTS: ${{ SECRET_KEY }}
+      SQL_ENGINE: ${{ SQL_ENGINE }}
+      SQL_DATABASE: ${{ SQL_DATABASE }}
+      SQL_USER: ${{ SQL_USER }}
+      SQL_PASSWORD: ${{ SQL_PASSWORD }}
+      SQL_HOST: ${{ SQL_HOST }}
+      SQL_PORT: ${{ SQL_PORT }}
+      DATABASE: ${{ DATABASE }}
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
@@ -27,9 +27,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-      POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      POSTGRES_USER: ${{ POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ POSTGRES_PASSWORD }}
+      POSTGRES_DB: ${{ POSTGRES_DB }}
   nginx:
     build: ./nginx
     volumes:
