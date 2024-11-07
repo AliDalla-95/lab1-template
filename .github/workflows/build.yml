@@ -20,18 +20,6 @@ jobs:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
       - name: Deploy to VPS
-        run: |
-          echo "DEBUG: $DEBUG"
-          echo "SECRET_KEY is set to ${#SECRET_KEY} characters"  # Just print length for sensitive vars
-          echo "DJANGO_ALLOWED_HOSTS: $DJANGO_ALLOWED_HOSTS"
-          echo "SQL_ENGINE: $SQL_ENGINE"
-          echo "SQL_DATABASE: $SQL_DATABASE"
-          echo "SQL_USER: $SQL_USER"
-          echo "SQL_HOST: $SQL_HOST"
-          echo "SQL_PORT: $SQL_PORT"
-          echo "DATABASE: $DATABASE"
-          echo "POSTGRES_USER: $POSTGRES_USER"
-          echo "POSTGRES_DB: $POSTGRES_DB"
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DEBUG: ${{ secrets.DEBUG }}
@@ -46,10 +34,10 @@ jobs:
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-        # run: |
-        #   ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
-        #     cd ${{ secrets.VPS_DEPLOY_PATH }}
-        #     git pull origin main
-        #     docker compose -f docker-compose.prod.yml down -v
-        #     docker compose -f docker-compose.prod.yml up -d --build
-        #   EOF
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+            cd ${{ secrets.VPS_DEPLOY_PATH }}
+            git pull origin master
+            docker compose -f docker-compose.prod.yml down -v
+            docker compose -f docker-compose.prod.yml up -d --build
+          EOF
