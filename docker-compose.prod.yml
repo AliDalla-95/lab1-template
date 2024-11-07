@@ -6,6 +6,17 @@ services:
     command: gunicorn person_api.wsgi:application --bind 0.0.0.0:8000
     expose:
       - 8000
+    environment:
+      DEBUG: False
+      SECRET_KEY: "django-insecure-x!&ph8ejfcdv)6)r(: s31z6py^pxw_e*_6g!n&u_t2sgcdvmzz"
+      DJANGO_ALLOWED_HOSTS: localhost 127.0.0.1 [::1] 91.222.238.179
+      SQL_ENGINE: django.db.backends.postgresql
+      SQL_DATABASE: personsdb
+      SQL_USER: ali
+      SQL_PASSWORD: aliali
+      SQL_HOST: db
+      SQL_PORT: 5432
+      DATABASE: postgres
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
@@ -15,6 +26,10 @@ services:
     image: postgres:17
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: ali
+      POSTGRES_PASSWORD: aliali
+      POSTGRES_DB: personsdb
   nginx:
     build: ./nginx
     volumes:
