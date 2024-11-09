@@ -8,16 +8,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      DEBUG: ${{ secrets.DEBUG }}
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
-      SQL_ENGINE: sqlite3
-      SQL_DATABASE: db.sqlite3
-      SQL_USER: user
-      SQL_PASSWORD: password
-      SQL_HOST: localhost
-      SQL_PORT: 5432      
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
