@@ -7,7 +7,7 @@ services:
     expose:
       - 8000
     environment:
-      DEBUG: False
+      DEBUG: 0
       SECRET_KEY: "django-insecure-x!&ph8ejfcdv)6)r(: s31z6py^pxw_e*_6g!n&u_t2sgcdvmzz"
       DJANGO_ALLOWED_HOSTS: localhost 127.0.0.1 [::1] 91.222.238.179
       SQL_ENGINE: django.db.backends.postgresql
