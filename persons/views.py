@@ -7,7 +7,7 @@ from .models import Person
 from .serializers import PersonSerializer
 
 
-class PersonViewSet(viewsets.ViewSet):
+class PersonViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for listing, retrieving, creating, updating, and deleting Persons.
     """
