@@ -43,9 +43,9 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          ssh -v -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
             cd ${{ secrets.VPS_DEPLOY_PATH }}
-            git pull origin master
+            git clone origin master
             docker compose -f docker-compose.prod.yml down -v
             docker compose -f docker-compose.prod.yml up -d --build
           EOF
