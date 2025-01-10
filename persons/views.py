@@ -38,9 +38,9 @@ class PersonViewSet(viewsets.ModelViewSet):
             person = Person.objects.get(pk=pk)
         except Person.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = PersonSerializer(person, data=request.data)
+        serializer = PersonSerializer(person, data=request.data, partial=True)
         if serializer.is_valid():
-            serializer.save()
+            person = serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
