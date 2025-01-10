@@ -8,6 +8,8 @@ from .serializers import PersonSerializer
 
 
 class PersonViewSet(viewsets.ModelViewSet):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
     """
     A simple ViewSet for listing, retrieving, creating, updating, and deleting Persons.
     """
