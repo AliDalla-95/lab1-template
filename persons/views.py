@@ -8,6 +8,7 @@ from .serializers import PersonSerializer
 
 
 class PersonViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
     """
     A simple ViewSet for listing, retrieving, creating, updating, and deleting Persons.
     """
