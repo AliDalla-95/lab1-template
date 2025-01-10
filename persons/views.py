@@ -8,8 +8,6 @@ from .serializers import PersonSerializer
 
 
 class PersonViewSet(viewsets.ModelViewSet):
-    queryset = Person.objects.all()
-    serializer_class = PersonSerializer
     """
     A simple ViewSet for listing, retrieving, creating, updating, and deleting Persons.
     """
@@ -40,7 +38,7 @@ class PersonViewSet(viewsets.ModelViewSet):
             person = Person.objects.get(pk=pk)
         except Person.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = PersonSerializer(person, data=request.data, partial=True)
+        serializer = PersonSerializer(person, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
