@@ -16,5 +16,5 @@ person_detail = PersonViewSet.as_view({
 
 urlpatterns = [
     path('', person_list, name='person-list'),
-    path('<int:pk>/', person_detail, name='person-detail'),
+    path('/<int:pk>', person_detail, name='person-detail'),
 ]
