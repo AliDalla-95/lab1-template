@@ -9,7 +9,7 @@ from .models import Person
 class PersonAPITests(APITestCase):
 
     def setUp(self):
-        self.person = Person.objects.create(name="Ali Dalla", age=30)
+        self.person = Person.objects.create(name="Ali Dalla", age=30 ,address="moscow", work="student")
 
     def test_get_all_persons(self):
         url = reverse('person-list')
@@ -26,7 +26,7 @@ class PersonAPITests(APITestCase):
 
     def test_create_person(self):
         url = reverse('person-list')
-        data = {'name': 'Maria Dalla', 'age': 25}
+        data = {'name': 'Maria Dalla', 'age': 25 , 'address' : 'moscow', 'work' : 'student'}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertIn('Location', response.headers)
