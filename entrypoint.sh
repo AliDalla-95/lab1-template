@@ -1,18 +1,18 @@
 #!/bin/sh
 
-if [ "$DATABASE" = "postgres" ]
-then
-    echo "Waiting for postgres..."
+# if local
+# until pg_isready -h db -U admin -d distlab; do
+# if remote
+until pg_isready -h 195.133.50.179 -U persona_id_user -d persona_id; do
+  echo "Waiting for database to be ready..."
+  sleep 2
+done
 
-    # Run the Python script to check database connection
-    while ! python check_db_connection.py; do
-        echo "Waiting for postgres to be ready..."
-        sleep 2
-    done
-    echo "PostgreSQL started"
-fi
+echo "Database is ready!"
 
-python manage.py flush --no-input
-python manage.py migrate
+python init_db.py
 
-exec "$@"
+# flask db init
+# flask db upgrade
+
+exec gunicorn --bind "0.0.0.0:${PORT}" --config config.py run:app

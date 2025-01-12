@@ -1,28 +1,16 @@
-# pull official base image
-FROM python:3.12.3-slim
+FROM python:3.9-slim
 
-# set work directory
 WORKDIR /app
 
-# set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+RUN apt-get update && apt-get install -y \
+    postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
 
-# install system dependencies
-# RUN apt-get update && apt-get install -y netcat
-
-# install dependencies
-RUN pip install --upgrade pip
-COPY requirements.txt /app/
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# copy project and entrypoint.sh
-COPY . /app/
-RUN sed -i 's/\r$//g' /app/entrypoint.sh
+COPY . .
 RUN chmod +x /app/entrypoint.sh
+EXPOSE 5000
 
-# Collect static files
-# RUN python manage.py collectstatic --noinput
-
-# run entrypoint.sh
 ENTRYPOINT ["/app/entrypoint.sh"]
