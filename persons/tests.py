@@ -9,13 +9,13 @@ from .models import Person
 class PersonAPITests(APITestCase):
 
     def setUp(self):
-        self.person = Person.objects.create(name="Ali Dalla", age=30 ,address="moscow", work="student")
+        self.person = Person.objects.create(name="Ali Dalla", age=30 , address="moscow", work="student")
 
     def test_get_all_persons(self):
         url = reverse('person-list')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data))
+        self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data[0]['name'], "Ali Dalla")
 
     def test_get_person_by_id(self):
@@ -30,7 +30,7 @@ class PersonAPITests(APITestCase):
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertIn('Location', response.headers)
-        self.assertEqual(Person.objects.count())
+        self.assertEqual(Person.objects.count(), 2)
         self.assertEqual(Person.objects.get(id=2).name, 'Maria Dalla')
 
     def test_update_person(self):
